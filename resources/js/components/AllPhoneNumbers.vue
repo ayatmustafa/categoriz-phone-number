@@ -99,13 +99,13 @@
                 }).catch(error => {
                         if (error.response.status === 422) {
                             this.requestErrors = error.response.data.errors;
-
+                            console.log(this.requestErrors)
                         } else {
-                            swal(error.response.data.message, "", "error");
+                            console.log(error.response.data.message)
                         }
                     })
                     .finally(() => {
-                        // console.log('final');
+                         console.log('final');
                     })
             },
             onclickNextPage: function()
