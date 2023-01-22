@@ -2,6 +2,7 @@
 
 namespace App\Console\Commands;
 
+use App\Exceptions\NotValidCodeException;
 use App\Models\Country;
 use App\Models\Customer;
 use App\Services\MangePhoneNumberService;
@@ -46,12 +47,17 @@ class CategorizeCountryPhoneNumbers extends Command
        foreach ($phones as $phone) {
             $arrPhone = explode(' ', $phone);
             $service = new MangePhoneNumberService();
-            $regex = $service->resolveCodeRegex($arrPhone[0]);
-            $country = (new Country)->store($regex['country'],  "+".trim(trim($arrPhone[0], "("), ")"));
-            $country->phones()->create([
-                'phone_number' => $arrPhone['1'],
-                'state' => $service->validatePhone($regex, $arrPhone[0], $arrPhone[1])
+            try{
+                $country = $service->getCountryByCode($arrPhone[0]);
+                $country = (new Country)->store($country,  "+".trim(trim($arrPhone[0], "("), ")"));
+                $country->phones()->create([
+                    'phone_number' => $arrPhone['1'],
+                    'state' => $service->validatePhone( $arrPhone[0], $arrPhone[1])
                 ]);
+            }catch(NotValidCodeException $e){
+                $this->info($arrPhone[0]." exception not valid");
+            }
+
        }
     }
 }
