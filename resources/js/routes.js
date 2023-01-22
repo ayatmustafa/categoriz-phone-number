@@ -1,9 +1,11 @@
 import AllPhoneNumbers from './components/AllPhoneNumbers.vue';
 
-export const routes = [
+  const routes = [
     {
         name: 'home',
         path: '/',
         component: AllPhoneNumbers
     },
 ];
+
+export default routes;

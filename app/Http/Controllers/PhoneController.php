@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\PhoneFilterRequest;
+use App\Http\Resources\PhoneCollection;
 use App\Http\Resources\phoneResource;
 use App\Models\phone;
 use Illuminate\Http\Request;
@@ -18,8 +19,8 @@ class PhoneController extends Controller
                             ->when(isset($request->state) && !is_null($request->state),function($q) use($request) {
                                 $q->whereState($request->state);
                             })
-                            ->get();
+                            ->paginate(config('app.paginate'));
 
-        return phoneResource::collection($phonesNumbers);
+        return new PhoneCollection($phonesNumbers);
     }
 }

@@ -2,7 +2,6 @@
 
 use App\Http\Controllers\CountryController;
 use App\Http\Controllers\PhoneController;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -16,7 +15,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('countries', [CountryController::class, 'index']);
-Route::post('filter', [PhoneController::class, 'filter']);
+Route::get('countries', [CountryController::class, 'index'])->name('countries.index');
+Route::post('filter', [PhoneController::class, 'filter'])->name('phone.filter');
 
 

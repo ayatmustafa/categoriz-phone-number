@@ -15,7 +15,7 @@ class phoneResource extends JsonResource
     public function toArray($request)
     {
         return [
-            "name" => $this->phone_number,
+            "phoneNumber" => $this->phone_number,
             "country" => new CountryResource($this->country) ,
             "state" => $this->state
         ];
