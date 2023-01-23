@@ -1,5 +1,5 @@
 <p align="center">
-<h1>categorize phone numbers asper country </h1>
+<h1>categorize phone numbers asper country Code </h1>
 </p>
 
 ## About Task
@@ -15,7 +15,7 @@ filter by country and state. Pagination is an extra.
 
 https://documenter.getpostman.com/view/20870167/2s8ZDYYhDM
 
-## What We Need To Run The Project 
+## What We Need To Run Task 
 - Clone the project 
 - Run (composer install) 
 - Run  (cp .env.example .env)  to generate .env
@@ -24,3 +24,11 @@ https://documenter.getpostman.com/view/20870167/2s8ZDYYhDM
 - Run php artisan migrate
 - Run php artisan serve
 - Get the Server running on (IP or Domain)/api and add it to .env in BASE_API_URL kye which is like .env.example
+- Run npm install
+- Run npm run dev
+
+## Describe task 
+- model of customer which db layer that call customers table 
+- helper which contain convertArrayToCollection function which is convert array to paginated collection 
+- CountryController which contain index method which is return all countries with it's code 
+- PhoneController which is contain filter with country and stat  method 
