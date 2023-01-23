@@ -1,17 +1,18 @@
 <?php
 namespace App\Services;
-use Illuminate\Support\Facades\Validator;
 
 class MangePhoneNumberService
 {
+    protected $countryService;
+
     public  function  resolveCodeRegex(string $code): array
     {
         $regex = [
-            '(237)' => ['code' => '(\(237\))' , 'phone' => '/^[2368][0-9]{7,8}$/', 'country' => 'Cameroon'],
-            '(251)' => ['code' => '(\(251\))' , 'phone' => '/^[1-59][0-9]{8}$/', 'country' => 'Ethiopia'],
-            '(212)' => ['code' => '(\(212\))' , 'phone' => '/^[5-9][0-9]{8}$/', 'country' => 'Morocco'],
-            '(258)' => ['code' => '(\(258\))' , 'phone' => '/^[28][0-9]{7,8}$/', 'country' => 'Mozambique'],
-            '(256)' => ['code' => '(\(256\))' , 'phone' => '/^[0-9]{9}$/', 'country' => 'Uganda'],
+            '(237)' => ['code' => '(\(237\))' , 'phone' => '/^[2368][0-9]{7,8}$/'],
+            '(251)' => ['code' => '(\(251\))' , 'phone' => '/^[1-59][0-9]{8}$/'],
+            '(212)' => ['code' => '(\(212\))' , 'phone' => '/^[5-9][0-9]{8}$/'],
+            '(258)' => ['code' => '(\(258\))' , 'phone' => '/^[28][0-9]{7,8}$/'],
+            '(256)' => ['code' => '(\(256\))' , 'phone' => '/^[0-9]{9}$/'],
         ];
 
         return $regex[$code];
@@ -30,16 +31,14 @@ class MangePhoneNumberService
         return false;
     }
 
-    public function getCountryByCode( string $code ): string
+    public  function getDataOfPoneNumber($phone): array
     {
-        $country = [
-            '(237)' => 'Cameroon',
-            '(251)' => 'Ethiopia',
-            '(212)' => 'Morocco',
-            '(258)' => 'Mozambique',
-            '(256)' => 'Uganda',
-        ];
-        return $country[$code]??[];
+        $arrPhone = explode(')', str_replace(" ","",$phone));
+        $code = $arrPhone[0].')';
+        $phoneNumber = $arrPhone[1];
+        $country = (new CountryService())->getCountryByCode($code);
+        $state = $this->validatePhone($code, $phoneNumber);
+        return ['country'=> $country , 'state' => $state, 'phoneNumber' => $phoneNumber, 'code' => $code];
     }
 }
 

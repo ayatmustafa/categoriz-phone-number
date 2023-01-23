@@ -7,10 +7,10 @@
                 </div>
                 <div class="row py-3 text-center">
                     <div class="col-md-6">
-                        <select  class="form-select" aria-label="Default select example" v-model="countryId"   @change="changeSelection">
+                        <select  class="form-select" aria-label="Default select example" v-model="country"   @change="changeSelection">
                             <option :value="null">All Countries</option>
-                            <option :value="item.id" v-for="item in countries">
-                                {{ item.name }}
+                            <option :value="item.code" v-for="item in countries">
+                                {{ item.country }}
                             </option>
                         </select>
                     </div>
@@ -35,9 +35,9 @@
                         </thead>
                         <tbody>
                         <tr   v-for="phoneNumber in phoneNumbers">
-                            <td>{{ phoneNumber.country.name }}</td>
+                            <td>{{ phoneNumber.country }}</td>
                             <td>{{ phoneNumber.state?"OK":"NOK" }}</td>
-                            <td>{{ phoneNumber.country.code }}</td>
+                            <td>{{ phoneNumber.code }}</td>
                             <td>{{ phoneNumber.phoneNumber }}</td>
                         </tr>
                         </tbody>
@@ -67,11 +67,12 @@
                 countries: [],
                 phoneNumbers: [],
                 requestErrors: [],
-                countryId: null,
+                country: null,
                 state: null,
                 nextPageUrl:null,
                 prevPageUrl:null,
-                url:'http://localhost:8000/api/filter'
+                url:'http://localhost:8000/api/filter',
+                filterUrl: 'http://localhost:8000/api/filter'
             }
         },
         created() {
@@ -90,12 +91,12 @@
             getPhoneNumbers: function()
             {
                 window.axios.post(this.url, {
-                    countryId: this.countryId,
+                    country: this.country,
                     state: this.state,
                 }).then(response => {
                     this.phoneNumbers = response.data.data;
-                    this.nextPageUrl = response.data.nextPageUrl;
-                    this.prevPageUrl = response.data.prevPageUrl;
+                    this.nextPageUrl = response.data.nextPageUrl?this.filterUrl+response.data.nextPageUrl:null;
+                    this.prevPageUrl = response.data.prevPageUrl?this.filterUrl+response.data.prevPageUrl:null;
                 }).catch(error => {
                         if (error.response.status === 422) {
                             this.requestErrors = error.response.data.errors;

@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use App\Models\Country;
+use App\Services\CountryService;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
 //use Illuminate\Validation\Validator;
@@ -30,7 +31,7 @@ class PhoneFilterRequest extends FormRequest
     public function rules()
     {
         return [
-            'countryId' => ['nullable', Rule::in(Country::select('id')->pluck('id')->toArray())],
+            'country' => ['nullable', Rule::in(collect((new CountryService)->getCountries())->pluck('country'))],
             'state' => ['nullable', Rule::in([true, false])],
         ];
     }

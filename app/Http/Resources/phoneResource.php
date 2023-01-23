@@ -15,9 +15,10 @@ class phoneResource extends JsonResource
     public function toArray($request)
     {
         return [
-            "phoneNumber" => $this->phone_number,
-            "country" => new CountryResource($this->country) ,
-            "state" => $this->state
+            "phoneNumber" => $this['phoneNumber'],
+            "country" => $this['country'] ,
+            "state" => $this['state'],
+            'code' => $this['code']
         ];
     }
 }
