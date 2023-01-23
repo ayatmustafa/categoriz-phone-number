@@ -71,9 +71,7 @@
                 state: null,
                 nextPageUrl:null,
                 prevPageUrl:null,
-                url:'http://localhost:8000/api/filter',
-                filterUrl: 'http://localhost:8000/api/filter'
-            }
+                url:'http://localhost:8000/api/filter'            }
         },
         created() {
                 this.getCountries();
@@ -95,8 +93,8 @@
                     state: this.state,
                 }).then(response => {
                     this.phoneNumbers = response.data.data;
-                    this.nextPageUrl = response.data.nextPageUrl?this.filterUrl+response.data.nextPageUrl:null;
-                    this.prevPageUrl = response.data.prevPageUrl?this.filterUrl+response.data.prevPageUrl:null;
+                    this.nextPageUrl = response.data.nextPageUrl;
+                    this.prevPageUrl = response.data.prevPageUrl;
                 }).catch(error => {
                         if (error.response.status === 422) {
                             this.requestErrors = error.response.data.errors;
