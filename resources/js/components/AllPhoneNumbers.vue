@@ -3,7 +3,7 @@
         <div class="container ">
             <div class="row mt-5  py-3 bg-light shadow">
                 <div class="row mt-5">
-                    <h1 class="text-center text-primary">phone numbers {{ base_api_url }}</h1><br/>
+                    <h1 class="text-center text-primary">phone numbers</h1><br/>
                 </div>
                 <div class="row py-3 text-center">
                     <div class="col-md-6">
@@ -71,30 +71,33 @@
                 state: null,
                 nextPageUrl:null,
                 prevPageUrl:null,
-                url:'http://localhost:8000/api/filter'            }
+                url:'/',
+                baseURL:null
+            }
         },
         created() {
+                const publicEnvVar = import.meta.env.VITE_BASE_URL;
+                this.baseURL = publicEnvVar
                 this.getCountries();
                 this.getPhoneNumbers();
-                console.log(this.base_api_url);
-
         },
         computed: {
-            base_api_url() {
-                return process.env.BASE_API_URL
-            }
+            // base_api_url() {
+            //    const publicEnvVar = import.meta.env.VITE_BASE_URL;
+            //    console.log(publicEnvVar);
+            // }
         },methods: {
             getCountries: function()
             {
               window.axios
-                    .get('http://localhost:8000/api/countries')
+                    .get(this.baseURL+'/countries')
                     .then(response => {
                         this.countries = response.data.data;
                     });
             },
             getPhoneNumbers: function()
             {
-                window.axios.post(this.url, {
+                window.axios.post(this.baseURL+'/filter'+this.url, {
                     country: this.country,
                     state: this.state,
                 }).then(response => {
@@ -125,7 +128,7 @@
             },
             changeSelection: function()
             {
-                this.url = 'http://localhost:8000/api/filter';
+                this.url = '/';
                 this.getPhoneNumbers()
             }
         }

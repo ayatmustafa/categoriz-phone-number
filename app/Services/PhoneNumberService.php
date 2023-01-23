@@ -1,10 +1,8 @@
 <?php
 namespace App\Services;
 
-class MangePhoneNumberService
+class PhoneNumberService
 {
-    protected $countryService;
-
     public  function  resolveCodeRegex(string $code): array
     {
         $regex = [

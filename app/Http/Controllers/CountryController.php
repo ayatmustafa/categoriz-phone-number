@@ -12,6 +12,6 @@ class CountryController extends Controller
 {
     public function index()
     {
-        return CountryResource::collection(collect((new CountryService)->getCountries()));
+        return CountryResource::collection((new CountryService)->getCountries());
     }
 }

@@ -13,7 +13,7 @@ class PhoneService
 
         foreach ($phones as $phone) {
             try{
-                    $phoneNumbersCollection[] = ((new MangePhoneNumberService())->getDataOfPoneNumber($phone));
+                    $phoneNumbersCollection[] = ((new PhoneNumberService())->getDataOfPoneNumber($phone));
                 }catch(NotValidCodeException $e)
                 {
                       $phone." exception not valid";
@@ -22,7 +22,7 @@ class PhoneService
         return $phoneNumbersCollection;
     }
 
-    public function filterPhoneNumber($country, $state)
+    public function filterPhoneNumbers($country, $state)
     {
        $data = $this->getPhoneNumbers();
        if(isset($country) && !is_null($country)){

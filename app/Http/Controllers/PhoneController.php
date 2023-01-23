@@ -10,6 +10,6 @@ class PhoneController extends Controller
 {
     public function filter(PhoneFilterRequest $request)
     {
-        return new PhoneCollection((new PhoneService())->filterPhoneNumber($request->country, $request->state));
+        return new PhoneCollection((new PhoneService())->filterPhoneNumbers($request->country, $request->state));
     }
 }
