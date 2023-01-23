@@ -2,11 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Resources\CountryResource;
-use App\Models\Country;
 use App\Services\CountryService;
-use Illuminate\Http\Request;
-use Ramsey\Collection\Collection;
+use App\Http\Resources\CountryResource;
 
 class CountryController extends Controller
 {

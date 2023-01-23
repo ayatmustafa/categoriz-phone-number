@@ -1,10 +1,11 @@
 <?php
 namespace App\Services;
-use Illuminate\Support\Facades\Validator;
+
+use Illuminate\Support\Collection;
 
 class CountryService
 {
-    public function getCountries()
+    public function getCountries(): Collection
     {
         return collect([
             ['code' => '(237)' , 'country'=>'Cameroon'],
@@ -17,7 +18,7 @@ class CountryService
 
     public function getCountryByCode(string $code): string
     {
-       return $this->getCountries()->where('code', $code)->first()['country']??'';
+       return $this->getCountries()->where('code', $code)->first()['country'] ?? '';
     }
 }
 

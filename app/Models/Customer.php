@@ -2,17 +2,15 @@
 
 namespace App\Models;
 
-
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Support\Facades\DB;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 /**
 * @property string name
 * @property string phone
 
 *
-* @method  CustomerQueryBuilder|self query
+* @method  getArrayOfPhoneNumbers|self query
 *
 * */
 class Customer extends Model

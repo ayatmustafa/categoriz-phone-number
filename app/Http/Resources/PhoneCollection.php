@@ -7,9 +7,8 @@ use Illuminate\Http\Resources\Json\ResourceCollection;
 class PhoneCollection extends ResourceCollection
 {
 
-    public function toArray($request)
+    public function toArray($request): array
     {
-
         return [
             'data' => phoneResource::collection($this->collection->toArray()),
             'currentPage' => $this->currentPage(),

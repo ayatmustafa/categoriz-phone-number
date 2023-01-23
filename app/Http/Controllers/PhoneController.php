@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\PhoneFilterRequest;
-use App\Http\Resources\PhoneCollection;
 use App\Services\PhoneService;
+use App\Http\Resources\PhoneCollection;
+use App\Http\Requests\PhoneFilterRequest;
 
 class PhoneController extends Controller
 {
