@@ -3,7 +3,7 @@
         <div class="container ">
             <div class="row mt-5  py-3 bg-light shadow">
                 <div class="row mt-5">
-                    <h1 class="text-center text-primary">phone numbers</h1><br/>
+                    <h1 class="text-center text-primary">phone numbers {{ base_api_url }}</h1><br/>
                 </div>
                 <div class="row py-3 text-center">
                     <div class="col-md-6">
@@ -75,9 +75,15 @@
         },
         created() {
                 this.getCountries();
-               this.getPhoneNumbers();
+                this.getPhoneNumbers();
+                console.log(this.base_api_url);
+
         },
-        methods: {
+        computed: {
+            base_api_url() {
+                return process.env.BASE_API_URL
+            }
+        },methods: {
             getCountries: function()
             {
               window.axios

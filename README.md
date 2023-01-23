@@ -16,13 +16,11 @@ filter by country and state. Pagination is an extra.
 https://documenter.getpostman.com/view/20870167/2s8ZDYYhDM
 
 ## What We Need To Run The Project 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
-
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
-
+- Clone the project 
+- Run (composer install) 
+- Run  (cp .env.example .env)  to generate .env
+- Open .env and add setting of data base that in project in database folder 
+- Run php artisan key:generate
+- Run php artisan migrate
+- Run php artisan serve
+- Get the Server running on (IP or Domain)/api and add it to .env in BASE_API_URL kye which is like .env.example
