@@ -80,12 +80,6 @@
                 this.baseURL = publicEnvVar
                 this.getCountries();
                 this.getPhoneNumbers();
-        },
-        computed: {
-            // base_api_url() {
-            //    const publicEnvVar = import.meta.env.VITE_BASE_URL;
-            //    console.log(publicEnvVar);
-            // }
         },methods: {
             getCountries: function()
             {
