@@ -9,7 +9,7 @@
                     <div class="col-md-6">
                         <select  class="form-select" aria-label="Default select example" v-model="country"   @change="changeSelection">
                             <option :value="null">All Countries</option>
-                            <option :value="item.code" v-for="item in countries">
+                            <option :value="item.country" v-for="item in countries">
                                 {{ item.country }}
                             </option>
                         </select>
