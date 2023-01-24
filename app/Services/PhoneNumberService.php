@@ -38,10 +38,11 @@ class PhoneNumberService
         $country = (new CountryService())->getCountryByCode($code);
         $data = ['country' => $country , 'phoneNumber' => $phoneNumber, 'code' => $code];
 
-        if($hasStatus){
+        if ($hasStatus) {
             $state = $this->validatePhone($code, $phoneNumber);
             $data['state'] = $state;
         }
+
         return $data;
     }
 }
