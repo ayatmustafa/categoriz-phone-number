@@ -8,7 +8,7 @@ use App\Exceptions\NotValidCodeException;
 use Illuminate\Pagination\LengthAwarePaginator;
 class PhoneService
 {
-    public function getPhoneNumbers(): Collection
+    private function getPhoneNumbers(): Collection
     {
         $phones = (new Customer)->getArrayOfPhoneNumbers();
         $phoneNumbersCollection = collect([]);

@@ -1,6 +1,7 @@
 <?php
 namespace App\Services;
 
+use App\Common\Enums\Country;
 use Illuminate\Support\Collection;
 
 class CountryService
@@ -8,11 +9,11 @@ class CountryService
     public function getCountries(): Collection
     {
         return collect([
-            ['code' => '(237)' , 'country' => 'Cameroon'],
-            ['code' => '(251)' , 'country' => 'Ethiopia'],
-            ['code' => '(212)' , 'country' => 'Morocco'],
-            ['code' => '(258)' , 'country' => 'Mozambique'],
-            ['code' => '(256)' , 'country' => 'Uganda'],
+            ['code' => '('.Country::CAMEROON_CODE.')', 'country' => Country::CAMEROON],
+            ['code' => '('.Country::ETHIOPIA_CODE.')', 'country' => Country::ETHIOPIA],
+            ['code' => '('.Country::MOROCCO_CODE.')', 'country' => Country::MOROCCO],
+            ['code' => '('.Country::MOZAMBIQUE_CODE.')', 'country' => Country::MOZAMBIQUE],
+            ['code' => '('.Country::UGANDA_CODE.')', 'country' => Country::UGANDA],
         ]);
     }
 

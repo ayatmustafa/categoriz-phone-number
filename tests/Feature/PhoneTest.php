@@ -11,7 +11,7 @@ use App\Common\Enums\RouteName;
 class PhoneTest extends TestCase
 {
     /** @test */
-    public function test_filter_phone_numbers()
+    public function filter_phone_numbers()
     {
         $this->post(route(RouteName::FILTER, [
             'country' => null,
@@ -31,7 +31,7 @@ class PhoneTest extends TestCase
     }
 
     /** @test */
-    public function test_required_fields_for_filter()
+    public function required_fields_for_filter()
     {
          $this->POST(route(RouteName::FILTER, [
             'country' => "wrong data",
