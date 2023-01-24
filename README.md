@@ -22,13 +22,13 @@ https://documenter.getpostman.com/view/20870167/2s8ZDYYhDM
 ## What We Need To Run Task 
 - Clone the project 
 - Run (composer install) 
+- Run npm install
 - Run  (cp .env.example .env)  to generate .env
 - Open .env and add setting of data base that in project in database folder 
 - Run php artisan key:generate
 - Run php artisan migrate
 - Run php artisan serve
 - Get the Server running on (IP or Domain)/api and add it to .env in BASE_API_URL kye which is like .env.example
-- Run npm install
 - Run npm run watch
 - Run php artisan test
 
