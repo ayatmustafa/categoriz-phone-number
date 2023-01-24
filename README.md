@@ -28,7 +28,7 @@ https://documenter.getpostman.com/view/20870167/2s8ZDYYhDM
 - Run php artisan key:generate
 - Run php artisan migrate
 - Run php artisan serve
-- Get the Server running on (IP or Domain)/api and add it to .env in BASE_API_URL kye which is like .env.example
+- Get the Server running on (IP or Domain)/api and add it to .env in VITE_BASE_URL kye which is like .env.example
 - Run npm run watch
 - Run php artisan test
 
