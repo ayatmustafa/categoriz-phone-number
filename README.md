@@ -26,7 +26,7 @@ https://documenter.getpostman.com/view/20870167/2s8ZDYYhDM
 - Get the Server running on (IP or Domain)/api and add it to .env in BASE_API_URL kye which is like .env.example
 - Run npm install
 - Run npm run watch
-
+- Run php artisan test
 
 ## Describe task 
 - model of customer which db layer that call customers table 
@@ -38,3 +38,5 @@ https://documenter.getpostman.com/view/20870167/2s8ZDYYhDM
 - PhoneNumberService this service used when we need to make process on single phone number
 - request validation for filter data 
 - mapping data in response also added 
+- functional test for country and phone filter
+- add enum in common

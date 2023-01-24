@@ -5,16 +5,18 @@ namespace Tests\Feature;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
+use App\Common\Enums\RouteName;
+
 
 class PhoneTest extends TestCase
 {
     /** @test */
     public function test_filter_phone_numbers()
     {
-        $this->post('api/filter', [
+        $this->post(route(RouteName::FILTER, [
             'country' => null,
             'state' => true,
-        ])
+        ]))
         ->assertStatus(200)
         ->assertJsonStructure([
             'data' => [
@@ -31,11 +33,10 @@ class PhoneTest extends TestCase
     /** @test */
     public function test_required_fields_for_filter()
     {
-         $this->POST('api/filter', [
+         $this->POST(route(RouteName::FILTER, [
             'country' => "wrong data",
             'state' => "wrong state",
-            ], ['Accept' => 'application/json']
-            )
+            ]))
             ->assertStatus(422)
              ->assertJson([
                 "success"=> false,

@@ -5,6 +5,8 @@ namespace Tests\Feature;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
+use App\Common\Enums\RouteName;
+
 
 class CountryTest extends TestCase
 {
@@ -15,7 +17,7 @@ class CountryTest extends TestCase
      */
     public function test_get_countries()
     {
-        $this->get('api/countries')
+        $this->get(route(RouteName::COUNTRIES))
              ->assertStatus(200)
              ->assertJsonStructure([
                 'data' => [

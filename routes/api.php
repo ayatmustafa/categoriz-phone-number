@@ -3,7 +3,7 @@
 use App\Http\Controllers\CountryController;
 use App\Http\Controllers\PhoneController;
 use Illuminate\Support\Facades\Route;
-
+use App\Common\Enums\RouteName;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -15,7 +15,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('countries', [CountryController::class, 'index'])->name('countries.index');
-Route::post('filter', [PhoneController::class, 'filter'])->name('phone.filter');
+Route::get('countries', [CountryController::class, 'index'])->name(RouteName::COUNTRIES);
+Route::post('filter', [PhoneController::class, 'filter'])->name(RouteName::FILTER);
 
 
