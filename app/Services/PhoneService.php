@@ -2,10 +2,10 @@
 namespace App\Services;
 
 use App\Models\Customer;
+use App\Common\Enums\Pagination;
 use Illuminate\Support\Collection;
 use App\Exceptions\NotValidCodeException;
 use Illuminate\Pagination\LengthAwarePaginator;
-use App\Common\Enums\Pagination;
 class PhoneService
 {
     public function getPhoneNumbers(): Collection

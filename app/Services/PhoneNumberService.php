@@ -3,7 +3,7 @@ namespace App\Services;
 
 class PhoneNumberService
 {
-    public  function  resolveCodeRegex(string $code): array
+    public function resolveCodeRegex(string $code): array
     {
         $regex = [
             '(237)' => ['code' => '(\(237\))' , 'phone' => '/^[2368][0-9]{7,8}$/'],
@@ -16,7 +16,7 @@ class PhoneNumberService
         return $regex[$code];
     }
 
-    public function validatePhone( string $code, string $phone): bool
+    public function validatePhone(string $code, string $phone): bool
     {
         $regex = $this->resolveCodeRegex($code);
         $checkCode = preg_match($regex['code'], $code);
@@ -29,14 +29,15 @@ class PhoneNumberService
         return false;
     }
 
-    public  function getDataOfPoneNumber($phone): array
+    public function getDataOfPoneNumber($phone): array
     {
-        $arrPhone = explode(')', str_replace(" ","",$phone));
+        $arrPhone = explode(')', str_replace(" ", "", $phone));
         $code = $arrPhone[0].')';
         $phoneNumber = $arrPhone[1];
         $country = (new CountryService())->getCountryByCode($code);
         $state = $this->validatePhone($code, $phoneNumber);
-        return ['country'=> $country , 'state' => $state, 'phoneNumber' => $phoneNumber, 'code' => $code];
+
+        return ['country' => $country , 'state' => $state, 'phoneNumber' => $phoneNumber, 'code' => $code];
     }
 }
 
