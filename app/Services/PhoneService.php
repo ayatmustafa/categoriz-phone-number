@@ -5,7 +5,7 @@ use App\Models\Customer;
 use Illuminate\Support\Collection;
 use App\Exceptions\NotValidCodeException;
 use Illuminate\Pagination\LengthAwarePaginator;
-
+use App\Common\Enums\Pagination;
 class PhoneService
 {
     public function getPhoneNumbers(): Collection
@@ -27,6 +27,7 @@ class PhoneService
     public function filterPhoneNumbers($country, $state): LengthAwarePaginator
     {
        $data = $this->getPhoneNumbers();
+
        if (isset($country) && !is_null($country)) {
         $data = $data->where('country', $country);
        }
@@ -35,7 +36,7 @@ class PhoneService
         $data = $data->where('state', $state);
        }
 
-       return convertArrayToCollection($data, config('app.paginate'));
+       return convertArrayToCollection($data, Pagination::PAGINATION);
     }
 }
 
