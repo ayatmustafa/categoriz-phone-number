@@ -13,7 +13,7 @@ class PhoneNumberService
             '(256)' => ['code' => '(\(256\))' , 'phone' => '/^[0-9]{9}$/'],
         ];
 
-        return $regex[$code];
+        return $regex[$code]??[];
     }
 
     public function validatePhone(string $code, string $phone): bool
@@ -32,8 +32,8 @@ class PhoneNumberService
     public function getDataOfPoneNumber($phone): array
     {
         $arrPhone = explode(')', str_replace(" ", "", $phone));
-        $code = $arrPhone[0].')';
-        $phoneNumber = $arrPhone[1];
+        $code = $arrPhone[0]?$arrPhone[0].')':'';
+        $phoneNumber = $arrPhone[1]??'';
         $country = (new CountryService())->getCountryByCode($code);
         $state = $this->validatePhone($code, $phoneNumber);
 
