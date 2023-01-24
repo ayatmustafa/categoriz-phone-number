@@ -8,6 +8,8 @@ use App\Exceptions\NotValidCodeException;
 use Illuminate\Pagination\LengthAwarePaginator;
 class PhoneService
 {
+    private $hasStatus = false;
+
     private function getPhoneNumbers(): Collection
     {
         $phones = (new Customer)->getArrayOfPhoneNumbers();
@@ -15,7 +17,7 @@ class PhoneService
 
         foreach ($phones as $phone) {
             try{
-                    $phoneNumbersCollection[] = ((new PhoneNumberService())->getDataOfPoneNumber($phone));
+                    $phoneNumbersCollection[] = ((new PhoneNumberService())->getDataOfPoneNumber($phone, $this->hasStatus));
                 } catch(NotValidCodeException $message) {
                       $phone." exception not valid";
                 }
@@ -26,6 +28,10 @@ class PhoneService
 
     public function filterPhoneNumbers($country, $state): LengthAwarePaginator
     {
+        if (isset($state) && !is_null($state)) {
+            $this->hasStatus = true;
+        }
+
        $data = $this->getPhoneNumbers();
 
        if (isset($country) && !is_null($country)) {
