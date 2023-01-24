@@ -18,7 +18,7 @@ class phoneResource extends JsonResource
             "phoneNumber" => $this['phoneNumber'],
             "country" => $this['country'] ,
             "state" => $this['state'],
-            'code' => $this['code']
+            'code' => '+'.str_replace( array("(",  ")"), '', $this['code'])
         ];
     }
 }
