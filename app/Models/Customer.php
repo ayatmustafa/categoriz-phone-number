@@ -6,13 +6,13 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 /**
-* @property string name
-* @property string phone
+ * @property string name
+ * @property string phone
 
-*
-* @method  getArrayOfPhoneNumbers|self query
-*
-* */
+ *
+ * @method  getArrayOfPhoneNumbers|self query
+ *
+ * */
 class Customer extends Model
 {
     use HasFactory;

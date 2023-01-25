@@ -16,7 +16,7 @@ class CountryResource extends JsonResource
     {
         return [
             "country" => $this['country'],
-            "code"=> $this['code']
+            "code" => $this['code']
         ];
     }
 }

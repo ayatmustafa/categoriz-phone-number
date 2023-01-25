@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Services;
 
 use App\Models\Customer;
@@ -6,9 +7,15 @@ use App\Common\Enums\Pagination;
 use Illuminate\Support\Collection;
 use App\Exceptions\NotValidCodeException;
 use Illuminate\Pagination\LengthAwarePaginator;
-class PhoneService
+
+class PhoneService implements PhoneInterface
 {
-    private $hasStatus = false;
+    private $hasStatus = false, $phoneNumberService;
+
+    public function __construct(PhoneNumberService $phoneNumberService)
+    {
+        $this->phoneNumberService = $phoneNumberService;
+    }
 
     private function getPhoneNumbers(): Collection
     {
@@ -16,11 +23,11 @@ class PhoneService
         $phoneNumbersCollection = collect([]);
 
         foreach ($phones as $phone) {
-            try{
-                    $phoneNumbersCollection[] = ((new PhoneNumberService())->getDataOfPoneNumber($phone, $this->hasStatus));
-                } catch(NotValidCodeException $message) {
-                      $phone." exception not valid";
-                }
+            try {
+                $phoneNumbersCollection[] = $this->phoneNumberService->getDataOfPoneNumber($phone, $this->hasStatus);
+            } catch (NotValidCodeException $message) {
+                $phone . " exception not valid";
+            }
         }
 
         return $phoneNumbersCollection;
@@ -32,17 +39,16 @@ class PhoneService
             $this->hasStatus = true;
         }
 
-       $data = $this->getPhoneNumbers();
+        $data = $this->getPhoneNumbers();
 
-       if (isset($country) && !is_null($country)) {
-        $data = $data->where('country', $country);
-       }
+        if (isset($country) && !is_null($country)) {
+            $data = $data->where('country', $country);
+        }
 
-       if (isset($state) && !is_null($state)) {
-        $data = $data->where('state', $state);
-       }
+        if (isset($state) && !is_null($state)) {
+            $data = $data->where('state', $state);
+        }
 
-       return convertArrayToCollection($data, Pagination::PAGINATION);
+        return convertArrayToCollection($data, Pagination::PAGINATION);
     }
 }
-

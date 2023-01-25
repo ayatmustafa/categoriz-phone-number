@@ -17,9 +17,9 @@ class phoneResource extends JsonResource
     {
         return [
             "phoneNumber" => $this['phoneNumber'],
-            "country" => $this['country'] ,
-            "state" => $this['state'] ?? (new PhoneNumberService())->validatePhone($this['code'], $this['phoneNumber']),
-            'code' => '+'.str_replace( array("(",  ")"), '', $this['code'])
+            "country" => $this['country'],
+            "state" => $this['state'] ?? resolve(PhoneNumberService::class)->validatePhone($this['code'], $this['phoneNumber']),
+            'code' => '+' . str_replace(array("(",  ")"), '', $this['code'])
         ];
     }
 }

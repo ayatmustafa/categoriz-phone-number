@@ -23,6 +23,5 @@ class PhoneCollection extends ResourceCollection
             'to' => $this->lastItem(),
             'total' => $this->total(),
         ];
-
     }
 }
