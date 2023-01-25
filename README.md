@@ -51,7 +51,7 @@ https://documenter.getpostman.com/view/20870167/2s8ZDYYhDM
     filter by country and state" and to confirm about that i asked HR if i could to connect to any one to confirm about that but she couldn't reach to any one.
 
 * First approach with normalization of DB which is better in performance with make 
-    - Table for country with (id , code, name) columns of country and  .
+    - Table for country with (id , code, name) columns of country .  .
     - Table of phone with (country_id , phone_number, state).
     - make script which is read all phone from customer table and categorize Data it in these tables after validate the phone number .
     - Then read data direct from DB .
