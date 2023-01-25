@@ -48,7 +48,7 @@ https://documenter.getpostman.com/view/20870167/2s8ZDYYhDM
 
 ## Technical Points
 - This task could be make with more than way but i have made 2 ways but i have send the second way because the task asked about that on this line "The page should render a list of all phone numbers available in the DB. It should be possible to
-    filter by country and state" and to confirm about that i asked HR if i could to connect to any one to confirm about that but she couldn't reach to any one.
+    filter by country and state"  so it should render data direct from DB and to confirm about that i asked HR if i could to connect to any one to confirm about that but she couldn't reach to any one.
 
 * First approach with normalization of DB which is better in performance with make 
     - Table for country with (id , code, name) columns of country .  .
