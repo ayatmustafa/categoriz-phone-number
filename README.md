@@ -13,7 +13,7 @@ filter by country and state. Pagination is an extra.
 
 ## quick test task video
 
-https://www.loom.com/share/ca73f0c7c76c42759eac22364d655301
+https://www.loom.com/share/d0ae1912dfc04e14aa87a93b98b0c3c8
 
 ## Postman Documentation 
 
