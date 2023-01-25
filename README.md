@@ -45,3 +45,16 @@ https://documenter.getpostman.com/view/20870167/2s8ZDYYhDM
 - mapping data in response also added 
 - functional test for country and phone filter
 - add enum in common
+
+## Technical Points
+- This task could be make with more than way but i have made 2 ways but i have send the second way because the task asked about that on this line "The page should render a list of all phone numbers available in the DB. It should be possible to
+    filter by country and state" and to confirm about that i asked HR if i could to connect to any one to confirm about that but she couldn't reach to any one.
+
+* First approach with normalization of DB which is better in performance with make 
+    - Table for country with (id , code, name) columns of country and  .
+    - Table of phone with (country_id , phone_number, state).
+    - make script which is read all phone from customer table and categorize Data it in these tables after validate the phone number .
+    - Then read data direct from DB .
+
+* Second approach with get data from DB and make process on data on the fly and render the data on page like what is asked in the task and i try to handel performance in this way as i can like validate state i don't reader all phones and make validation for stat in the first if the filter with null i handel i on loaded data after pagination in resource and so on 
+
