@@ -34,12 +34,12 @@ https://documenter.getpostman.com/view/20870167/2s8ZDYYhDM
 - Run php artisan test
 
 ## Describe task 
-- model of customer which db layer that call customers table 
+- model of customer which db layer that call customer table 
 - helper which contain convertArrayToCollection function which is convert array to paginated collection 
 - CountryController which contain index method which is return all countries with it's code 
-- PhoneController which is contain filter with country and stat  method 
+- PhoneController which is contain filter with country and state  method 
 - CountryService which contain all logic about countries in task
-- phoneService which also contain logic about get get phone numbers and make filtration on it 
+- phoneService which also contain logic about get phone numbers and make filtration on it 
 - PhoneNumberService this service used when we need to make process on single phone number
 - request validation for filter data 
 - mapping data in response also added 
