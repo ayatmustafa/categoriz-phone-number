@@ -56,10 +56,6 @@ class PhoneFilterRequest extends FormRequest
             'errors' => $errors
         ];
 
-        if ($this->type) {
-            $info['type'] = $this->type;
-        }
-
         $response = new JsonResponse($info, 422);
 
         throw new ValidationException($validator, $response);

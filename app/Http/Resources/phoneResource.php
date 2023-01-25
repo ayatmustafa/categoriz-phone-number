@@ -2,7 +2,7 @@
 
 namespace App\Http\Resources;
 
-use App\Services\PhoneNumberService;
+use App\Services\PhoneNumberHandler;
 use Illuminate\Http\Resources\Json\JsonResource;
 
 class phoneResource extends JsonResource
@@ -18,7 +18,7 @@ class phoneResource extends JsonResource
         return [
             "phoneNumber" => $this['phoneNumber'],
             "country" => $this['country'],
-            "state" => $this['state'] ?? resolve(PhoneNumberService::class)->validatePhone($this['code'], $this['phoneNumber']),
+            "state" => $this['state'] ?? resolve(PhoneNumberHandler::class)->validatePhone($this['code'], $this['phoneNumber']),
             'code' => '+' . str_replace(array("(",  ")"), '', $this['code'])
         ];
     }

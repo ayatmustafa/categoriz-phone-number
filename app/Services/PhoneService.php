@@ -10,11 +10,11 @@ use Illuminate\Pagination\LengthAwarePaginator;
 
 class PhoneService implements PhoneInterface
 {
-    private $hasStatus = false, $phoneNumberService;
+    private $hasStatus = false, $phoneNumberHandler;
 
-    public function __construct(PhoneNumberService $phoneNumberService)
+    public function __construct(PhoneNumberHandler $phoneNumberHandler)
     {
-        $this->phoneNumberService = $phoneNumberService;
+        $this->phoneNumberHandler = $phoneNumberHandler;
     }
 
     private function getPhoneNumbers(): Collection
@@ -24,7 +24,7 @@ class PhoneService implements PhoneInterface
 
         foreach ($phones as $phone) {
             try {
-                $phoneNumbersCollection[] = $this->phoneNumberService->getDataOfPoneNumber($phone, $this->hasStatus);
+                $phoneNumbersCollection[] = $this->phoneNumberHandler->getDataOfPoneNumber($phone, $this->hasStatus);
             } catch (NotValidCodeException $message) {
                 $phone . " exception not valid";
             }

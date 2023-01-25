@@ -4,7 +4,7 @@ namespace App\Services;
 
 use App\Common\Enums\Country;
 
-class PhoneNumberService implements PhoneNumberInterface
+class PhoneNumberHandler implements PhoneNumberInterface
 {
     private function resolveCodeRegex(string $code): array
     {

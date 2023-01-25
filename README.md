@@ -40,7 +40,7 @@ https://documenter.getpostman.com/view/20870167/2s8ZDYYhDM
 - PhoneController which is contain filter with country and state  method 
 - CountryService which contain all logic about countries in task
 - phoneService which also contain logic about get phone numbers and make filtration on it 
-- PhoneNumberService this service used when we need to make process on single phone number
+- PhoneNumberHandler this class used when we need to make process on single phone number
 - request validation for filter data 
 - mapping data in response also added 
 - functional test for country and phone filter
