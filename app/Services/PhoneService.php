@@ -10,16 +10,17 @@ use Illuminate\Pagination\LengthAwarePaginator;
 
 class PhoneService implements PhoneInterface
 {
-    private $hasStatus = false, $phoneNumberHandler;
+    private $hasStatus = false, $phoneNumberHandler, $customer;
 
-    public function __construct(PhoneNumberHandler $phoneNumberHandler)
+    public function __construct(PhoneNumberHandler $phoneNumberHandler, Customer $customer)
     {
         $this->phoneNumberHandler = $phoneNumberHandler;
+        $this->customer = $customer;
     }
 
     private function getPhoneNumbers(): Collection
     {
-        $phones = (new Customer)->getArrayOfPhoneNumbers();
+        $phones = $this->customer->getArrayOfPhoneNumbers();
         $phoneNumbersCollection = collect([]);
 
         foreach ($phones as $phone) {

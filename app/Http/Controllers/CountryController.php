@@ -3,8 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Services\CountryService;
-use Illuminate\Http\JsonResponse;
 use App\Http\Resources\CountryResource;
+use Illuminate\Http\Resources\Json\JsonResource;
 
 class CountryController extends Controller
 {
@@ -15,8 +15,8 @@ class CountryController extends Controller
         $this->countryService = $countryService;
     }
 
-    public function index(): JsonResponse
+    public function index(): JsonResource
     {
-        return new JsonResponse(CountryResource::collection($this->countryService->getCountries()), 200);
+        return CountryResource::collection($this->countryService->getCountries());
     }
 }

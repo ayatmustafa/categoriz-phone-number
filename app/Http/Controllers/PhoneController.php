@@ -16,8 +16,8 @@ class PhoneController extends Controller
         $this->phoneService = $phoneService;
     }
 
-    public function filter(PhoneFilterRequest $request): JsonResponse
+    public function filter(PhoneFilterRequest $request): PhoneCollection
     {
-        return  new JsonResponse(new PhoneCollection($this->phoneService->filterPhoneNumbers($request->country, $request->state)), 200);
+        return  new PhoneCollection($this->phoneService->filterPhoneNumbers($request->country, $request->state));
     }
 }
