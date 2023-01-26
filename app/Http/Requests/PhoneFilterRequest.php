@@ -29,7 +29,7 @@ class PhoneFilterRequest extends FormRequest
     public function rules()
     {
         return [
-            'country' => ['nullable', Rule::in((new CountryService)->getCountries()->pluck('country'))],
+            'country' => ['nullable', Rule::in(resolve(CountryService::class)->getCountries()->pluck('country'))],
             'state' => ['nullable', Rule::in([true, false])],
         ];
     }
