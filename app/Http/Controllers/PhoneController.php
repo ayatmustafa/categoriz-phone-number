@@ -6,21 +6,20 @@ use App\Http\Requests\PhoneFilterRequest;
 use App\Http\Resources\PhoneCollection;
 use App\Http\Resources\phoneResource;
 use App\Models\phone;
+use App\Services\PhoneService;
 use Illuminate\Http\Request;
 
 class PhoneController extends Controller
 {
+    private $phoneService;
+
+    public function __construct(PhoneService $phoneService)
+    {
+        $this->phoneService = $phoneService;
+    }
+
     public function filter(PhoneFilterRequest $request)
     {
-        $phonesNumbers = phone::query()
-                            ->when(isset($request->countryId) && !is_null($request->countryId), function($q) use($request) {
-                                $q->whereCountry($request->countryId);
-                            })
-                            ->when(isset($request->state) && !is_null($request->state),function($q) use($request) {
-                                $q->whereState($request->state);
-                            })
-                            ->paginate(config('app.paginate'));
-
-        return new PhoneCollection($phonesNumbers);
+        return new PhoneCollection($this->phoneService->filter($request->country, $request->state));
     }
 }

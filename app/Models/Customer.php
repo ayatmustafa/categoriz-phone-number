@@ -2,7 +2,6 @@
 
 namespace App\Models;
 
-use App\QueryBuilders\CustomerQueryBuilder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -27,8 +26,8 @@ class Customer extends Model
 
     protected $guarded = ['id'];
 
-    public function newEloquentBuilder($query): CustomerQueryBuilder
+    public function getArrayOfPhoneNumbers(): array
     {
-        return new CustomerQueryBuilder($query);
+        return $this->select('phone')->pluck('phone')->toArray();
     }
 }

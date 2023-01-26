@@ -7,10 +7,10 @@
                 </div>
                 <div class="row py-3 text-center">
                     <div class="col-md-6">
-                        <select  class="form-select" aria-label="Default select example" v-model="countryId"   @change="changeSelection">
+                        <select  class="form-select" aria-label="Default select example" v-model="country"   @change="changeSelection">
                             <option :value="null">All Countries</option>
-                            <option :value="item.id" v-for="item in countries">
-                                {{ item.name }}
+                            <option :value="item.country" v-for="item in countries">
+                                {{ item.country }}
                             </option>
                         </select>
                     </div>
@@ -35,9 +35,9 @@
                         </thead>
                         <tbody>
                         <tr   v-for="phoneNumber in phoneNumbers">
-                            <td>{{ phoneNumber.country.name }}</td>
+                            <td>{{ phoneNumber.country }}</td>
                             <td>{{ phoneNumber.state?"OK":"NOK" }}</td>
-                            <td>{{ phoneNumber.country.code }}</td>
+                            <td>{{ phoneNumber.code }}</td>
                             <td>{{ phoneNumber.phoneNumber }}</td>
                         </tr>
                         </tbody>
@@ -67,30 +67,32 @@
                 countries: [],
                 phoneNumbers: [],
                 requestErrors: [],
-                countryId: null,
+                country: null,
                 state: null,
                 nextPageUrl:null,
                 prevPageUrl:null,
-                url:'http://localhost:8000/api/filter'
+                url:'/',
+                baseURL:null
             }
         },
         created() {
+                const publicEnvVar = import.meta.env.VITE_BASE_URL;
+                this.baseURL = publicEnvVar
                 this.getCountries();
-               this.getPhoneNumbers();
-        },
-        methods: {
+                this.getPhoneNumbers();
+        },methods: {
             getCountries: function()
             {
               window.axios
-                    .get('http://localhost:8000/api/countries')
+                    .get(this.baseURL+'/countries')
                     .then(response => {
-                        this.countries = response.data.data;
+                        this.countries = response.data;
                     });
             },
             getPhoneNumbers: function()
             {
-                window.axios.post(this.url, {
-                    countryId: this.countryId,
+                window.axios.post(this.baseURL+'/filter'+this.url, {
+                    country: this.country,
                     state: this.state,
                 }).then(response => {
                     this.phoneNumbers = response.data.data;
@@ -120,7 +122,7 @@
             },
             changeSelection: function()
             {
-                this.url = 'http://localhost:8000/api/filter';
+                this.url = '/';
                 this.getPhoneNumbers()
             }
         }

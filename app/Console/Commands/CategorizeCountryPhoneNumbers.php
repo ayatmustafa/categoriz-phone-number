@@ -5,10 +5,9 @@ namespace App\Console\Commands;
 use App\Exceptions\NotValidCodeException;
 use App\Models\Country;
 use App\Models\Customer;
-use App\Services\MangePhoneNumberService;
+use App\Services\CountryService;
+use App\Services\PhoneNumberHandler;
 use Illuminate\Console\Command;
-
-
 class CategorizeCountryPhoneNumbers extends Command
 {
     /**
@@ -42,22 +41,23 @@ class CategorizeCountryPhoneNumbers extends Command
      */
     public function handle()
     {
-       $phones = Customer::select('phone')->pluck('phone')->toArray();
+        $phones = resolve(Customer::class)->getArrayOfPhoneNumbers();
 
-       foreach ($phones as $phone) {
-            $arrPhone = explode(' ', $phone);
-            $service = new MangePhoneNumberService();
-            try{
-                $country = $service->getCountryByCode($arrPhone[0]);
-                $country = (new Country)->store($country,  "+".trim(trim($arrPhone[0], "("), ")"));
-                $country->phones()->create([
-                    'phone_number' => $arrPhone['1'],
-                    'state' => $service->validatePhone( $arrPhone[0], $arrPhone[1])
+        foreach ($phones as $phone) {
+            $arrPhone = explode(')', str_replace(" ", "", $phone));
+            $code = $arrPhone[0] ? $arrPhone[0] . ')' : '';
+            $phoneNumber = $arrPhone[1] ?? '';
+            $service = new PhoneNumberHandler();
+            try {
+                $country = resolve(CountryService::class)->getCountryByCode($code);
+                $country = resolve(Country::class)->store($country,  "+" . trim(trim($code, "("), ")"));
+                $country->phones()->firstOrCreate([
+                    'phone_number' => $phoneNumber,
+                    'state' => $service->validatePhone($code, $phoneNumber)
                 ]);
-            }catch(NotValidCodeException $e){
-                $this->info($arrPhone[0]." exception not valid");
+            } catch (NotValidCodeException $e) {
+                $this->info($code . " exception not valid");
             }
-
-       }
+        }
     }
 }

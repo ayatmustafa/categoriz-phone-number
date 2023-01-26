@@ -26,11 +26,6 @@ class phone extends Model
         return $this->belongsTo(country::class);
     }
 
-    public function countryStore(string $phoneNumber, bool $state): phone
-    {
-        return $this->create(['phone_number' => $phoneNumber, 'state' => $state]);
-    }
-
     public function scopWhereStates(Builder $query, bool $state): Builder
     {
         return $query->where('state', $state);

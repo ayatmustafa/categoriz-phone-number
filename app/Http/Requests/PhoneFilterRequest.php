@@ -2,10 +2,9 @@
 
 namespace App\Http\Requests;
 
-use App\Models\Country;
+use App\Services\CountryService;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
-//use Illuminate\Validation\Validator;
 use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Validation\ValidationException;
@@ -30,7 +29,7 @@ class PhoneFilterRequest extends FormRequest
     public function rules()
     {
         return [
-            'countryId' => ['nullable', Rule::in(Country::select('id')->pluck('id')->toArray())],
+            'country' => ['nullable', Rule::in((new CountryService)->getCountries()->pluck('country'))],
             'state' => ['nullable', Rule::in([true, false])],
         ];
     }
@@ -38,7 +37,7 @@ class PhoneFilterRequest extends FormRequest
     public function messages()
     {
         return [
-            'countryId' => 'Country Should Be Saved IN Our DB',
+            'country' => 'Country Should Be Saved IN Our DB',
             'state' => 'State Should Be Valid or not Valid',
         ];
     }
@@ -56,10 +55,6 @@ class PhoneFilterRequest extends FormRequest
             'message' => 'The given data was invalid.',
             'errors' => $errors
         ];
-
-        if ($this->type) {
-            $info['type'] = $this->type;
-        }
 
         $response = new JsonResponse($info, 422);
 

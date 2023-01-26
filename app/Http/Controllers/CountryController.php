@@ -2,15 +2,21 @@
 
 namespace App\Http\Controllers;
 
+use App\Services\CountryService;
+use Illuminate\Http\JsonResponse;
 use App\Http\Resources\CountryResource;
-use App\Models\Country;
-use Illuminate\Http\Request;
-use Ramsey\Collection\Collection;
 
 class CountryController extends Controller
 {
-    public function index()
+    protected $countryService;
+
+    public function __construct(CountryService $countryService)
     {
-        return CountryResource::collection(Country::get());
+        $this->countryService = $countryService;
+    }
+
+    public function index(): JsonResponse
+    {
+        return new JsonResponse(CountryResource::collection($this->countryService->getCountries()), 200);
     }
 }

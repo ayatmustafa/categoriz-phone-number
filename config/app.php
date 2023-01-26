@@ -68,6 +68,8 @@ return [
 
     'url' => env('APP_URL', 'http://localhost'),
 
+    'base_api_url'=>env('VITE_BASE_URL', 'http://localhost:8000/api'),
+
     'asset_url' => env('ASSET_URL'),
 
     /*
